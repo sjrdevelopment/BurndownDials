@@ -72,8 +72,10 @@ function checkForUpdates() {
 
 checkForUpdates();
 
-
+// set to 1800000 = 30 mins for production
 //setInterval(checkForUpdates, 1800000);
+
+// set to 5 secs for development
 setInterval(checkForUpdates, 5000);
 
 
