@@ -89,8 +89,8 @@ app.post('/', function(req, res) {
   var stat = req.query.sprint;
   
   if (stat) {
-    currentSprint = stat;
-    res.send('thanks for the update, the current sprint is now ' + stat);
+    currentSprint = parseInt(stat);
+    res.send('thanks for the update, the current sprint is now ' + currentSprint);
   } else {
     res.send('Sprint number not updated');
   }
