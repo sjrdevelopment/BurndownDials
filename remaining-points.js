@@ -3,6 +3,7 @@ var express = require("express");
 var logfmt = require("logfmt");
 var multipart = require('connect-multiparty');
 var request = require('request');
+var config = require('./config');
 var app = express();
 
 var currentPoints = 0;
@@ -35,15 +36,15 @@ app.get('/', function(req, res) {
 });
 
 function getJQLString() {
-   return 'https://jira.lbi.co.uk/rest/api/2/search?jql=project+%3D+PH+AND+issuetype+%3D+Story+AND+status+in+%28Open%2C+%22In+Progress%22%2C+Reopened%2C+%22Ready+for+Test%22%29+AND+labels+%3D+Pre-Sales+AND+sprint%3D' + currentSprint;
+   return config.host + currentSprint;
 }
 
 function checkForUpdates() {
   request.get(getJQLString(),
     {
      'auth': {
-      'user': '[username]',
-      'pass': '[password]',
+      'user': config.username,
+      'pass': config.password,
       'sendImmediately': true
      }
   }, function (error, response, body) {
